@@ -1,0 +1,11 @@
+# Git Commands to Push to GitHub
+# Replace YOUR_USERNAME with your actual GitHub username
+
+# 1. Set your GitHub username (replace with yours)
+git remote set-url origin https://github.com/YOUR_USERNAME/enhanced-job-detector.git
+
+# 2. Push to GitHub
+git push -u origin master
+
+# Alternative: If you want to force push (use carefully)
+git push -f origin master
