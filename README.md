@@ -1,145 +1,170 @@
 # Enhanced Rule-Based Fake Internship & Job Offer Detection System
 
-A full-stack web application that analyzes job offers using rule-based algorithms to detect potentially fake or suspicious opportunities.
+A full-stack web application that helps identify potentially fraudulent job postings using rule-based analysis and machine learning techniques.
 
-## Tech Stack
-- **Frontend**: React 18 with functional components, hooks, and Axios
-- **Backend**: Java Spring Boot with REST APIs
-- **Database**: MySQL
+## 🚀 Features
 
-## Project Structure
-```
-job-detector/
-├── backend/                        # Spring Boot application
-│   ├── src/main/java/com/jobdetector/
-│   │   ├── JobDetectorApplication.java
-│   │   ├── controller/
-│   │   ├── entity/
-│   │   ├── repository/
-│   │   └── service/
-│   ├── src/main/resources/
-│   │   └── application.properties
-│   ├── pom.xml
-│   └── README.md
-├── frontend/                       # React application
-│   ├── public/
-│   │   └── index.html
-│   ├── src/
-│   │   ├── pages/
-│   │   │   ├── Register.js
-│   │   │   ├── Login.js
-│   │   │   └── Dashboard.js
-│   │   ├── App.js
-│   │   ├── App.css
-│   │   ├── index.js
-│   │   └── index.css
-│   ├── package.json
-│   └── README.md
-└── README.md                       # This file
-```
+- 🔍 **Smart Job Analysis** - Rule-based risk scoring system
+- 👤 **User Authentication** - Secure registration and login system
+- 📊 **Interactive Dashboard** - Real-time job analysis results
+- 🛡️ **Risk Assessment** - SAFE, SUSPICIOUS, FAKE classification
+- 💾 **Data Persistence** - MySQL database integration
+- 🔒 **Security** - CORS enabled and input validation
 
-## Features
-- User authentication (registration/login)
-- Rule-based job offer analysis
-- Risk scoring system (0-10+ points)
-- Status classification (SAFE/SUSPICIOUS/FAKE)
-- Job analysis history
-- Color-coded UI indicators
+## 🛠️ Tech Stack
 
-## Rule-Based Analysis Logic
+### Backend
+- **Framework**: Spring Boot 3.x
+- **Language**: Java 17
+- **Database**: MySQL 8.0
+- **ORM**: Spring Data JPA
+- **Build Tool**: Maven
+- **Security**: Spring Security (CORS configuration)
 
-### Risk Factors:
-1. **High Salary**: Salary > $100,000 → +2 risk points
-2. **Suspicious Email Domains**: gmail.com, yahoo.com → +2 risk points
-3. **Suspicious Keywords**: "urgent", "quick money", "no experience", "work from home" → +3 risk points
+### Frontend
+- **Framework**: React 18
+- **Language**: JavaScript ES6+
+- **HTTP Client**: Axios
+- **Routing**: React Router DOM
+- **Styling**: CSS3 with responsive design
+- **Build Tool**: Create React App
 
-### Classification:
-- **Risk Score ≥ 5**: FAKE (Red)
-- **Risk Score ≥ 3**: SUSPICIOUS (Yellow)
-- **Risk Score < 3**: SAFE (Green)
-
-## Setup Instructions
+## 📋 Installation & Setup
 
 ### Prerequisites
 - Java 17+
-- Maven 3.6+
 - Node.js 16+
 - MySQL 8.0+
+- Maven 3.6+
 
-### Step 1: Database Setup
-```sql
-CREATE DATABASE job_detector;
-```
-
-### Step 2: Backend Setup
-1. Navigate to backend directory:
+### Backend Setup
 ```bash
 cd backend
-```
-
-2. Update database credentials in `src/main/resources/application.properties`
-
-3. Run the backend:
-```bash
 mvn clean install
 mvn spring-boot:run
 ```
 
-Backend will start on `http://localhost:8080`
-
-### Step 3: Frontend Setup
-1. Navigate to frontend directory:
+### Frontend Setup
 ```bash
-cd frontend
-```
-
-2. Install dependencies:
-```bash
+cd frontend-new
 npm install
-```
-
-3. Start the frontend:
-```bash
 npm start
 ```
 
-Frontend will start on `http://localhost:3000`
+### Database Setup
+```sql
+CREATE DATABASE job_detector;
+USE job_detector;
+```
 
-## API Endpoints
+## 🎯 Usage
+
+1. **Start the applications**:
+   - Backend: `http://localhost:8080`
+   - Frontend: `http://localhost:3001`
+
+2. **Register a new account** at `http://localhost:3001/register`
+
+3. **Login** with your credentials at `http://localhost:3001/login`
+
+4. **Analyze job postings** from the dashboard at `http://localhost:3001/dashboard`
+
+## 🔍 Risk Analysis Rules
+
+The system analyzes job postings based on multiple risk factors:
+
+### High Risk Indicators
+- Suspicious email domains (gmail.com, yahoo.com, etc.)
+- Unrealistic salary ranges
+- Urgent hiring language
+- Requests for payment/training fees
+- Vague job descriptions
+
+### Medium Risk Indicators
+- Generic company names
+- Remote-only positions without details
+- Poor grammar in postings
+
+### Safe Indicators
+- Official company domains
+- Realistic salary ranges
+- Detailed job requirements
+- Professional contact information
+
+## 📊 API Endpoints
 
 ### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
 
 ### Job Analysis
-- `POST /api/jobs/analyze` - Analyze job offer
+- `POST /api/jobs/analyze` - Analyze job posting
 - `GET /api/jobs` - Get all analyzed jobs
 
-## Usage
-1. Start both backend and frontend applications
-2. Register a new user account
-3. Login to access the dashboard
-4. Enter job details in the analysis form
-5. View risk assessment and classification
-6. Browse previous analyses in the history section
+## 🗄️ Database Schema
 
-## Sample Test Data
-Try these examples to test the detection system:
+### Users Table
+```sql
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+```
 
-**Safe Job Example:**
-- Company: "Microsoft Corporation"
-- Email: "careers@microsoft.com"
-- Salary: 80000
-- Description: "Software developer position with competitive benefits"
+### Jobs Table
+```sql
+CREATE TABLE jobs (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    company_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    salary DECIMAL(10,2) NOT NULL,
+    description TEXT NOT NULL,
+    risk_score INT NOT NULL,
+    status VARCHAR(20) NOT NULL
+);
+```
 
-**Suspicious Job Example:**
-- Company: "QuickTech Solutions"
-- Email: "jobs@quicktech.com"
-- Salary: 95000
-- Description: "Urgent hiring for software developer"
+## 🚀 Deployment
 
-**Fake Job Example:**
-- Company: "GetRichFast Inc"
-- Email: "opportunity@gmail.com"
-- Salary: 150000
-- Description: "Quick money opportunity, no experience required, work from home"
+### Docker Deployment
+```yaml
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/job_detector
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+  
+  frontend:
+    build: ./frontend-new
+    ports:
+      - "3001:3000"
+    depends_on:
+      - backend
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👥 Authors
+
+- **Your Name** - *Initial Development & Architecture*
+
+---
+
+**Built with ❤️ to help job seekers avoid fraudulent opportunities**
