@@ -21,6 +21,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
+    setIsError(false);
     
     try {
       const response = await api.post('/api/auth/login', formData);
@@ -31,8 +32,9 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(response.data.user));
       navigate('/dashboard');
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Login failed');
+      console.error('Login error:', error);
       setIsError(true);
+      setMessage(error.response?.data?.message || 'Login failed. Please try again.');
     }
   };
 

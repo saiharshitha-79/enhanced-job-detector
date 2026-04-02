@@ -46,15 +46,17 @@ const Dashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
-    setAnalysisResult(null);
+    setIsError(false);
+    const jobData = {
+      ...formData,
+      salary: parseFloat(formData.salary)
+    };
 
     try {
-      const response = await api.post('/api/jobs/analyze', {
-        ...formData,
-        salary: parseFloat(formData.salary)
-      });
+      const response = await api.post('/api/jobs/analyze', jobData);
+      const analyzedJob = response.data;
       
-      setAnalysisResult(response.data);
+      setAnalysisResult(analyzedJob);
       setIsError(false);
       
       // Refresh jobs list
@@ -68,8 +70,9 @@ const Dashboard = () => {
         description: ''
       });
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Job analysis failed');
+      console.error('Job analysis error:', error);
       setIsError(true);
+      setMessage(error.response?.data?.message || 'Job analysis failed. Please try again.');
     }
   };
 

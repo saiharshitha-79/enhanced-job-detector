@@ -22,6 +22,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
+    setIsError(false);
     
     try {
       const response = await api.post('/api/auth/register', formData);
@@ -33,8 +34,9 @@ const Register = () => {
         navigate('/login');
       }, 2000);
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Registration failed');
+      console.error('Registration error:', error);
       setIsError(true);
+      setMessage(error.response?.data?.message || 'Registration failed. Please try again.');
     }
   };
 

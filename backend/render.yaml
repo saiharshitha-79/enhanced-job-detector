@@ -1,0 +1,30 @@
+services:
+  # Spring Boot Backend Service
+  - type: web
+    name: job-detector-backend
+    env: docker
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://dpg-xxxxxxxxx.oregon.render.com:5432/job_detector
+      - key: SPRING_DATASOURCE_USERNAME
+        value: job_detector_user
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: your_password_here
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: SPRING_JPA_SHOW_SQL
+        value: "true"
+      - key: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
+        value: org.hibernate.dialect.PostgreSQLDialect
+
+databases:
+  # PostgreSQL Database
+  - name: job-detector-db
+    databaseName: job_detector
+    user: job_detector_user
+    plan: free
