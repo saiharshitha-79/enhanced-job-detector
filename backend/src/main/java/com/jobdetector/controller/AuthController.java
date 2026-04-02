@@ -18,6 +18,15 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
     
+    @GetMapping("/health")
+    public ResponseEntity<?> healthCheck() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "UP");
+        response.put("timestamp", System.currentTimeMillis());
+        response.put("service", "Enhanced Job Detection System");
+        return ResponseEntity.ok(response);
+    }
+    
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         try {

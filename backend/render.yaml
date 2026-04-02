@@ -4,21 +4,27 @@ services:
     name: job-detector-backend
     env: docker
     dockerfilePath: ./Dockerfile
+    dockerContext: ./backend
     autoDeploy: true
     plan: free
+    healthCheckPath: /api/auth/health
     envVars:
       - key: PORT
         value: 8080
+      - key: JAVA_OPTS
+        value: "-Xmx512m -Xms256m"
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:postgresql://dpg-xxxxxxxxx.oregon.render.com:5432/job_detector
+        sync: false
       - key: SPRING_DATASOURCE_USERNAME
-        value: job_detector_user
+        sync: false
       - key: SPRING_DATASOURCE_PASSWORD
-        value: your_password_here
+        sync: false
       - key: SPRING_JPA_HIBERNATE_DDL_AUTO
         value: update
       - key: SPRING_JPA_SHOW_SQL
-        value: "true"
+        value: "false"
       - key: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
         value: org.hibernate.dialect.PostgreSQLDialect
 
