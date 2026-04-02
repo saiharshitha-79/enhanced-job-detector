@@ -1,0 +1,54 @@
+🚀 QUICK DEPLOYMENT STEPS - Enhanced Job Detection System
+
+👤 Your GitHub Username: saiharshitha-79
+
+📋 STEP 1: Create GitHub Repository (MUST DO FIRST)
+1. Go to: https://github.com/new
+2. Repository name: enhanced-job-detector
+3. Description: Enhanced Rule-Based Fake Job Detection System
+4. Make it: PUBLIC ✅
+5. Click: Create repository
+
+📋 STEP 2: Push Code to GitHub
+cd c:\fakeee
+git remote set-url origin https://github.com/saiharshitha-79/enhanced-job-detector.git
+git push -u origin main
+
+📋 STEP 3: Deploy Frontend to Vercel
+cd c:\fakeee\frontend-new
+npx vercel --prod
+Set REACT_APP_API_URL=https://jobdetector-backend.onrender.com
+
+📋 STEP 4: Deploy Backend to Render
+1. Go to: https://render.com
+2. Sign up with GitHub
+3. Click "New +" → "Web Service"
+4. Connect: saiharshitha-79/enhanced-job-detector
+5. Configure:
+   - Name: job-detector-backend
+   - Environment: Docker
+   - Root Directory: backend
+   - Dockerfile: Dockerfile
+   - Branch: main
+   - Plan: Free
+6. Create PostgreSQL database:
+   - Click "New +" → "PostgreSQL"
+   - Name: job-detector-db
+   - Plan: Free
+7. Set Environment Variables (copy from database dashboard):
+   - SPRING_DATASOURCE_URL
+   - SPRING_DATASOURCE_USERNAME
+   - SPRING_DATASOURCE_PASSWORD
+
+📋 STEP 5: Test Your Live Application
+- Backend Health: https://jobdetector-backend.onrender.com/api/auth/health
+- Frontend: https://your-app.vercel.app
+
+🎉 CONGRATULATIONS! Your Enhanced Job Detection System is LIVE!
+
+🌐 Expected URLs:
+- Backend: https://jobdetector-backend.onrender.com
+- Frontend: https://your-app.vercel.app
+- GitHub: https://github.com/saiharshitha-79/enhanced-job-detector
+
+📞 If you need help, check the deployment guides created in your project folder.
